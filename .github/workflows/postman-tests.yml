@@ -11,18 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v5
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: '22'
+          node-version: 24
 
-      - name: Install Newman
-        run: npm install -g newman
+      - run: npm install -g newman
 
-      - name: Run Postman Collection
-        run: |
+      - run: |
+          node -v
+          npm -v
+          newman -v
+
+      - run: |
           newman run "Booking API Collection.postman_collection.json" \
           -e "Booking Environment.postman_environment.json"

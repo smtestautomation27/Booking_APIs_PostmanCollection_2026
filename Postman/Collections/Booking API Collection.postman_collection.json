@@ -16,10 +16,15 @@
             {
               "listen": "test",
               "script": {
-                "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 201\", function() {\r\n    pm.response.to.have.status(201);\r\n})\r\n"
-                ]
+                  "pm.test(\"Status code is 201\", function() {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "})\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
               }
             }
           ],
@@ -27,12 +32,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://restful-booker.herokuapp.com/ping",
-              "protocol": "https",
+              "raw": "{{baseUrl}}/ping",
               "host": [
-                "restful-booker",
-                "herokuapp",
-                "com"
+                "{{baseUrl}}"
               ],
               "path": [
                 "ping"
@@ -89,12 +91,9 @@
               }
             },
             "url": {
-              "raw": "https://restful-booker.herokuapp.com/auth",
-              "protocol": "https",
+              "raw": "{{baseUrl}}/auth",
               "host": [
-                "restful-booker",
-                "herokuapp",
-                "com"
+                "{{baseUrl}}"
               ],
               "path": [
                 "auth"
@@ -146,12 +145,9 @@
               }
             },
             "url": {
-              "raw": "https://restful-booker.herokuapp.com/booking",
-              "protocol": "https",
+              "raw": "{{baseUrl}}/booking",
               "host": [
-                "restful-booker",
-                "herokuapp",
-                "com"
+                "{{baseUrl}}"
               ],
               "path": [
                 "booking"
@@ -193,12 +189,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://restful-booker.herokuapp.com/booking/{{bookingId}}",
-              "protocol": "https",
+              "raw": "{{baseUrl}}/booking/{{bookingId}}",
               "host": [
-                "restful-booker",
-                "herokuapp",
-                "com"
+                "{{baseUrl}}"
               ],
               "path": [
                 "booking",
@@ -244,12 +237,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://restful-booker.herokuapp.com/booking?firstname=Suman&lastname=Mallick",
-              "protocol": "https",
+              "raw": "{{baseUrl}}/booking?firstname=Suman&lastname=Mallick",
               "host": [
-                "restful-booker",
-                "herokuapp",
-                "com"
+                "{{baseUrl}}"
               ],
               "path": [
                 "booking"
@@ -318,12 +308,9 @@
               }
             },
             "url": {
-              "raw": "https://restful-booker.herokuapp.com/booking/{{bookingId}}",
-              "protocol": "https",
+              "raw": "{{baseUrl}}/booking/{{bookingId}}",
               "host": [
-                "restful-booker",
-                "herokuapp",
-                "com"
+                "{{baseUrl}}"
               ],
               "path": [
                 "booking",
@@ -380,12 +367,9 @@
               }
             },
             "url": {
-              "raw": "https://restful-booker.herokuapp.com/booking/{{bookingId}}",
-              "protocol": "https",
+              "raw": "{{baseUrl}}/booking/{{bookingId}}",
               "host": [
-                "restful-booker",
-                "herokuapp",
-                "com"
+                "{{baseUrl}}"
               ],
               "path": [
                 "booking",
@@ -401,10 +385,28 @@
             {
               "listen": "test",
               "script": {
-                "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\npm.sendRequest({\r\n    url: `https://restful-booker.herokuapp.com/booking/${pm.environment.get(\"bookingId\")}`,\r\n    method: 'GET',\r\n    header: {\r\n        'Content-Type': 'application/json'\r\n    }\r\n}, function (err, res) {\r\n    pm.test(\"Deleted booking is no longer available\", function () {\r\n        pm.expect(err).to.equal(null);\r\n        pm.expect(res).to.exist;\r\n        pm.expect(res.code).to.equal(404);\r\n    });\r\n});"
-                ]
+                  "pm.test(\"Status code is 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.sendRequest({\r",
+                  "    url: `https://restful-booker.herokuapp.com/booking/${pm.environment.get(\"bookingId\")}`,\r",
+                  "    method: 'GET',\r",
+                  "    header: {\r",
+                  "        'Content-Type': 'application/json'\r",
+                  "    }\r",
+                  "}, function (err, res) {\r",
+                  "    pm.test(\"Deleted booking is no longer available\", function () {\r",
+                  "        pm.expect(err).to.equal(null);\r",
+                  "        pm.expect(res).to.exist;\r",
+                  "        pm.expect(res.code).to.equal(404);\r",
+                  "    });\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
               }
             }
           ],
@@ -417,12 +419,9 @@
               }
             ],
             "url": {
-              "raw": "https://restful-booker.herokuapp.com/booking/{{bookingId}}",
-              "protocol": "https",
+              "raw": "{{baseUrl}}/booking/{{bookingId}}",
               "host": [
-                "restful-booker",
-                "herokuapp",
-                "com"
+                "{{baseUrl}}"
               ],
               "path": [
                 "booking",

@@ -26,4 +26,4 @@ jobs:
 
       - run: |
           newman run "Booking API Collection.postman_collection.json" \
-          -e "Booking Environment.postman_environment.json"
+          -e "Booking API Environment.postman_environment.json"

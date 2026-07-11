@@ -1,3 +1,34 @@
+# name: Postman API Tests
+
+# on:
+#   push:
+#     branches:
+#       - master
+#   workflow_dispatch:
+
+# jobs:
+#   postman-tests:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - uses: actions/checkout@v5
+
+#       - uses: actions/setup-node@v6
+#         with:
+#           node-version: 24
+
+#       - run: npm install -g newman
+
+#       - run: |
+#           node -v
+#           npm -v
+#           newman -v
+
+#       - run: |
+#           newman run "Postman/Collections/Booking API Collection.postman_collection.json" \
+#           -e "Postman/Environments/Booking API Environment.postman_environment.json"
+
+
 name: Postman API Tests
 
 on:
@@ -17,13 +48,26 @@ jobs:
         with:
           node-version: 24
 
-      - run: npm install -g newman
+      # 1. Install both Newman and the required HTML reporter extension globally
+      - run: npm install -g newman newman-reporter-htmlextra
 
       - run: |
           node -v
           npm -v
           newman -v
 
+      # 2. Updated newman command to output both CLI logs and a clean HTML file
+      # The "|| true" ensures the workflow continues so the report uploads even if tests fail
       - run: |
           newman run "Postman/Collections/Booking API Collection.postman_collection.json" \
-          -e "Postman/Environments/Booking API Environment.postman_environment.json"
+          -e "Postman/Environments/Booking API Environment.postman_environment.json" \
+          -r cli,htmlextra \
+          --reporter-htmlextra-export results/report.html || true
+
+      # 3. Save the generated HTML file inside your GitHub Actions summary
+      - name: Upload Postman HTML Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: postman-api-report
+          path: results/report.html
+          retention-days: 5

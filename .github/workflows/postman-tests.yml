@@ -1,9 +1,10 @@
-name: Run Postman Collection
+name: Postman API Tests
 
 on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
   postman-tests:
@@ -11,12 +12,17 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
 
       - name: Install Newman
         run: npm install -g newman
 
-      - name: Run Collection
+      - name: Run Postman Collection
         run: |
           newman run "Booking API Collection.postman_collection.json" \
           -e "Booking Environment.postman_environment.json"
